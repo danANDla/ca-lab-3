@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MethodResult {
-    HashMap<String, Double> values;
+    double answer;
 
-    public MethodResult(HashMap<String, Double> values, SolutionStatus status) {
-        this.values = values;
+    public MethodResult(double answer, SolutionStatus status) {
+        this.answer = answer;
         this.status = status;
     }
 
     SolutionStatus status;
 
-    public HashMap<String, Double> getValues() {
-        return values;
+    public double getAnswer() {
+        return answer;
     }
 
     public SolutionStatus getStatus() {

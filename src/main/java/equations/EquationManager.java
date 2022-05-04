@@ -12,4 +12,6 @@ public class EquationManager {
     public ArrayList<Equation> getAllEqations() {
         return allEqations;
     }
+
+    public Equation getEq(int v){return  allEqations.get(v);}
 }
