@@ -8,10 +8,14 @@ import java.util.HashMap;
 public abstract class RiemannMethod {
     EquationManager equationManager;
 
-    public abstract MethodResult solveEquation(int eqid, double[] borders, int iterations, HashMap<String, Double> guesses);
+    public RiemannMethod(EquationManager equationManager) {
+        this.equationManager = equationManager;
+    }
 
-    public int getSteps(double[] borders, double accuracy, double maxSecondDerivativeValue){
-        double result = Math.sqrt((maxSecondDerivativeValue * Math.pow((borders[1] - borders[0]), 3)) / (12 * accuracy));
+    public abstract MethodResult solveEquation(int eqid, double[] borders, double eps);
+
+    public int getSteps(double[] borders, double eps, double maxSecondDerivativeValue){
+        double result = Math.sqrt((maxSecondDerivativeValue * Math.pow((borders[1] - borders[0]), 3)) / (24 * eps));
         if (Math.abs(result - (int) result) < 0.000001) return (int) result;
         else return (int) result + 1;
     }

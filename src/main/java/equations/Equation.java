@@ -7,7 +7,7 @@ public interface Equation {
     Double get1Derivative(double v);
     Double get2Derivative(double v);
 
-    String ToString();
+    String toString();
     default double getSecondDerivativeMaxValue(double[] borders) {
         Double max = Math.abs(this.get2Derivative(borders[0]));
         if (max.isInfinite()) {
