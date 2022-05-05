@@ -1,5 +1,8 @@
 package utils;
 
+import methods.MethodResult;
+import methods.SolutionStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -82,11 +85,13 @@ public class IOutil{
         System.out.print("> ");
     }
 
-//    public void printResult(MethodResult res){
-//        HashMap<String, Double> vars = res.getValues();
-//        System.out.println(res.getStatus().getDescription());
-//        for(Map.Entry<String, Double> variable: vars.entrySet()){
-//            System.out.printf("%3s = %4.9f\n", variable.getKey(), variable.getValue());
-//        }
-//    }
+    public void printResult(MethodResult res){
+        if(res.getStatus() == SolutionStatus.OK){
+            System.out.println(res.getStatus().getDescription());
+            System.out.printf("%.6f\n", res.getAnswer());
+        }
+        else{
+            System.out.println(res.getStatus().getDescription());
+        }
+    }
 }
