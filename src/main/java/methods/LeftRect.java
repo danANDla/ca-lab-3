@@ -15,14 +15,13 @@ public class LeftRect extends RiemannMethod {
     }
 
     private double getSquare(int eqid, double[] borders) {
-//        System.out.println(Arrays.toString(borders));
         Equation eq = equationManager.getEq(eqid);
         if (eq.getImage(borders[0]) * eq.getImage(borders[1]) >= 0) {
             return Math.abs(borders[1] - borders[0]) * eq.getImage(borders[0]);
         }
         double t = borders[1];
-        if(eq.getImage(t) >= 0) while (eq.getImage(t) > 0) t -= 0.000001;
-        else if(eq.getImage(t) < 0) while (eq.getImage(t) < 0) t -= 0.000001;
+        if (eq.getImage(t) >= 0) while (eq.getImage(t) > 0) t -= 0.000001;
+        else if (eq.getImage(t) < 0) while (eq.getImage(t) < 0) t -= 0.000001;
 
         return getSquare(eqid, new double[]{borders[0], t}) + getSquare(eqid, new double[]{t + 0.0000011, borders[1]});
     }
@@ -34,8 +33,6 @@ public class LeftRect extends RiemannMethod {
         double ans = 0;
 
         double maxDer = eq.get2DerivativeMaxValue(borders);
-//        int steps = getSteps(borders, eps, maxDer);
-//        int steps = 10000000;
         double step = Math.abs(borders[0] - borders[1]) / steps;
 
         while (steps-- > 0) {

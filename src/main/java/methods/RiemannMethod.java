@@ -25,7 +25,10 @@ public abstract class RiemannMethod {
         Equation eq = equationManager.getEq(eqid);
         Double y = eq.getImage(v);
         if(y.isNaN()){
-            if(gapRemovable(eqid, v)) return true;
+            if(gapRemovable(eqid, v)){
+                System.out.println("устранимый разрыв первого рода в " + v);
+                return true;
+            }
         }
         if (y.isInfinite()) {
             throw new EssentialDiscontinuityException("неустранимый разрыв второго рода в ", v);
