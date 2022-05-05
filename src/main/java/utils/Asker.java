@@ -101,6 +101,21 @@ public class Asker {
         return eps;
     }
 
+    public int askSteps(){
+        io.printText("Введите количество отрезков");
+        boolean valid = false;
+        int steps = 0;
+        while (!valid) {
+            try {
+                steps = Integer.parseInt(getNonEmpty());
+                valid = true;
+            } catch (NumberFormatException e) {
+                io.printError("Неправильный формат числа");
+            }
+        }
+        return steps;
+    }
+
     public int askIterations(){
         io.printText("Введите максимальное количество итераций");
         boolean valid = false;

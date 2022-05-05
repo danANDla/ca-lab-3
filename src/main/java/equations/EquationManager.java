@@ -8,6 +8,7 @@ public class EquationManager {
     public EquationManager() {
         allEqations = new ArrayList<>();
         allEqations.add(new eq1());
+        allEqations.add(new eq2());
     }
 
     public ArrayList<Equation> getAllEqations() {

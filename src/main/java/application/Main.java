@@ -25,8 +25,9 @@ public class Main {
                     int eqid = asker.askEquation();
                     if (eqid == -1) break;
                     double[] borders = asker.askBorders();
-                    double eps = asker.askEps();
-                    MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
+//                    double eps = asker.askEps();
+                    int steps = asker.askSteps();
+                    MethodResult leftRes = leftRect.solveEquation(eqid, borders, steps);
                     io.printResult(leftRes);
                     break;
                 }
