@@ -24,10 +24,21 @@ public abstract class RiemannMethod {
     public boolean isGap(int eqid, double v) throws EssentialDiscontinuityException {
         Equation eq = equationManager.getEq(eqid);
         Double y = eq.getImage(v);
-        if (y.isInfinite()) {
-            throw new EssentialDiscontinuityException();
+        if(y.isNaN()){
+            if(gapRemovable(eqid, v)) return true;
         }
-        if(y.isNaN()) return true;
+        if (y.isInfinite()) {
+            throw new EssentialDiscontinuityException("неустранимый разрыв второго рода в ", v);
+        }
         return false;
+    }
+
+    public boolean gapRemovable(int eqid, double v) throws EssentialDiscontinuityException{
+        Equation eq = equationManager.getEq(eqid);
+        double close = 1e-7;
+        double l = eq.getImage(v + close);
+        double r = eq.getImage(v + close);
+        if(Math.abs(l-r) < close) return true;
+        else throw new EssentialDiscontinuityException("неустранимый разрыв первого рода в ", v);
     }
 }
