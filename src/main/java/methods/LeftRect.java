@@ -20,9 +20,10 @@ public class LeftRect extends RiemannMethod {
             return Math.abs(borders[1] - borders[0]) * eq.getImage(borders[0]);
         }
         double t = borders[1];
-        if(eq.getImage(t) >= 0) while (eq.getImage(t) >= 0) t -= 0.000001;
+        if(eq.getImage(t) >= 0) while (eq.getImage(t) > 0) t -= 0.000001;
         else if(eq.getImage(t) < 0) while (eq.getImage(t) < 0) t -= 0.000001;
-        return getSquare(eqid, new double[]{borders[0], t}) + getSquare(eqid, new double[]{t, borders[1]});
+
+        return getSquare(eqid, new double[]{borders[0], t}) + getSquare(eqid, new double[]{t + 0.0000011, borders[1]});
     }
 
     @Override
@@ -31,7 +32,7 @@ public class LeftRect extends RiemannMethod {
         double point = borders[0];
         double ans = 0;
 
-        double maxDer = eq.getSecondDerivativeMaxValue(borders);
+        double maxDer = eq.get2DerivativeMaxValue(borders);
         int steps = getSteps(borders, eps, maxDer);
         double step = Math.abs(borders[0] - borders[1]) / steps;
 

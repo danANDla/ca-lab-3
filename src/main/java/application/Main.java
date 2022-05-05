@@ -27,7 +27,7 @@ public class Main {
                     double[] borders = asker.askBorders();
                     double eps = asker.askEps();
                     MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
-
+                    io.printResult(leftRes);
                     break;
                 }
                 case (0): {

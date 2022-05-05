@@ -8,9 +8,9 @@ public interface Equation {
     Double get2Derivative(double v);
 
     String toString();
-    default double getSecondDerivativeMaxValue(double[] borders) {
+    default double get2DerivativeMaxValue(double[] borders) {
         Double max = Math.abs(this.get2Derivative(borders[0]));
-        if (max.isInfinite()) {
+        if (max.isInfinite() || max.isNaN()) {
             max = Math.abs(this.get2Derivative(borders[0] + 0.01));
         }
         double x_0 = borders[0];
