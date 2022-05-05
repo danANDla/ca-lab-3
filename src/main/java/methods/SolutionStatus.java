@@ -1,7 +1,7 @@
 package methods;
 
 public enum SolutionStatus {
-    OK("solution has been found sucessfully");
+    OK("решение найдено успешно");
     private String description;
 
     SolutionStatus(String s) {this.description = s;}

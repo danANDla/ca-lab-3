@@ -27,8 +27,12 @@ public class Main {
                     double[] borders = asker.askBorders();
 //                    double eps = asker.askEps();
                     int steps = asker.askSteps();
-                    MethodResult leftRes = leftRect.solveEquation(eqid, borders, steps);
-                    io.printResult(leftRes);
+                    try {
+                        MethodResult leftRes = leftRect.solveEquation(eqid, borders, steps);
+                        io.printResult(leftRes);
+                    } catch (Exception e){
+                        io.printError(e.getMessage());
+                    }
                     break;
                 }
                 case (0): {

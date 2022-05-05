@@ -2,6 +2,7 @@ package methods;
 
 import equations.Equation;
 import equations.EquationManager;
+import exceptions.EssentialDiscontinuityException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class LeftRect extends RiemannMethod {
     }
 
     @Override
-    public MethodResult solveEquation(int eqid, double[] borders, int steps) {
+    public MethodResult solveEquation(int eqid, double[] borders, int steps) throws EssentialDiscontinuityException {
         Equation eq = equationManager.getEq(eqid);
         double point = borders[0];
         double ans = 0;

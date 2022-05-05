@@ -2,6 +2,7 @@ package methods;
 
 import equations.Equation;
 import equations.EquationManager;
+import exceptions.EssentialDiscontinuityException;
 
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ public abstract class RiemannMethod {
         this.equationManager = equationManager;
     }
 
-    public abstract MethodResult solveEquation(int eqid, double[] borders, int steps);
+    public abstract MethodResult solveEquation(int eqid, double[] borders, int steps) throws EssentialDiscontinuityException;
 
     public int getSteps(double[] borders, double eps, double maxSecondDerivativeValue){
         double result = Math.sqrt((maxSecondDerivativeValue * Math.pow((borders[1] - borders[0]), 3)) / (24 * eps));
@@ -20,12 +21,11 @@ public abstract class RiemannMethod {
         else return (int) result + 1;
     }
 
-    public boolean isGap(int eqid, double v){
+    public boolean isGap(int eqid, double v) throws EssentialDiscontinuityException {
         Equation eq = equationManager.getEq(eqid);
         Double y = eq.getImage(v);
         if (y.isInfinite()) {
-            System.out.println("РАЗРЫВ ВТОРОГО РОДА");
-            return true;
+            throw new EssentialDiscontinuityException();
         }
         if(y.isNaN()) return true;
         return false;
