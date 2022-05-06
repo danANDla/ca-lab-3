@@ -28,7 +28,7 @@ public class Main {
                     double eps = asker.askEps();
                     try {
                         MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
-                        io.printResult(leftRes);
+                        io.printResult(leftRes, eps);
                     } catch (Exception e){
                         io.printError(e.getMessage());
                     }
