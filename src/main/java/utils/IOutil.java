@@ -41,6 +41,11 @@ public class IOutil {
         else System.err.println(text);
     }
 
+    public void printBadMsg(String text) {
+        if (errsInOut) System.out.println("\u001B[31m" + text + "\u001B[0m");
+        else System.err.println(text);
+    }
+
     public String readLine() {
         return scanner.nextLine();
     }
@@ -97,11 +102,11 @@ public class IOutil {
         }
 
         if (res.getStatus() == SolutionStatus.OK) {
-            System.out.println(res.getStatus().getDescription());
-            String s = String.format("%%.%df\n", k+1);
+            printText(res.getStatus().getDescription());
+            String s = String.format("%%.%df\n", k + 1);
             System.out.printf(s, res.getAnswer());
         } else {
-            System.out.println(res.getStatus().getDescription());
+            printBadMsg(res.getStatus().getDescription());
         }
     }
 }

@@ -1,10 +1,14 @@
 package methods;
 
 public enum SolutionStatus {
-    OK("решение найдено успешно");
+    OK("Решение найдено успешно");
     private String description;
 
-    SolutionStatus(String s) {this.description = s;}
+    SolutionStatus(String s) {
+        this.description = s;
+    }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 }
