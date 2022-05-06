@@ -18,12 +18,12 @@ public abstract class RiemannMethod {
         Double y = eq.getImage(v);
         if (y.isNaN()) {
             if (gapRemovable(eq, v)) {
-                System.out.println("устранимый разрыв первого рода в " + v);
+                System.out.println("устранимый разрыв первого рода в точке" + v);
                 return true;
             }
         }
         if (y.isInfinite()) {
-            throw new EssentialDiscontinuityException("неустранимый разрыв второго рода в ", v);
+            throw new EssentialDiscontinuityException("неустранимый разрыв второго рода в точке ", v);
         }
         return false;
     }
@@ -33,6 +33,6 @@ public abstract class RiemannMethod {
         double l = eq.getImage(v + close);
         double r = eq.getImage(v + close);
         if (Math.abs(l - r) < close) return true;
-        else throw new EssentialDiscontinuityException("неустранимый разрыв первого рода в ", v);
+        else throw new EssentialDiscontinuityException("неустранимый разрыв первого рода в точке ", v);
     }
 }
