@@ -103,7 +103,7 @@ public class IOutil {
 
         if (res.getStatus() == SolutionStatus.OK) {
             printText(res.getStatus().getDescription());
-            String s = String.format("%%.%df\n", k + 1);
+            String s = String.format("# %%.%df #\n", k + 1);
             System.out.printf(s, res.getAnswer());
         } else {
             printBadMsg(res.getStatus().getDescription());
