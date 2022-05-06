@@ -3,6 +3,7 @@ package methods;
 import equations.Equation;
 import equations.EquationManager;
 import exceptions.EssentialDiscontinuityException;
+import exceptions.UnattainableAccuracyException;
 
 import java.util.HashMap;
 
@@ -13,7 +14,7 @@ public abstract class RiemannMethod {
         this.equationManager = equationManager;
     }
 
-    public abstract MethodResult solveEquation(int eqid, double[] borders, int steps) throws EssentialDiscontinuityException;
+    public abstract MethodResult solveEquation(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException;
 
     public int getSteps(double[] borders, double eps, double maxSecondDerivativeValue){
         double result = Math.sqrt((maxSecondDerivativeValue * Math.pow((borders[1] - borders[0]), 3)) / (24 * eps));
