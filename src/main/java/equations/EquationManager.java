@@ -11,6 +11,7 @@ public class EquationManager {
         allEqations.add(new eq2());
         allEqations.add(new eq3());
         allEqations.add(new eq4());
+        allEqations.add(new eq5());
     }
 
     public ArrayList<Equation> getAllEqations() {
