@@ -5,7 +5,7 @@ import equations.EquationManager;
 import exceptions.EssentialDiscontinuityException;
 import exceptions.UnattainableAccuracyException;
 
-public class RightRect extends RiemannMethod {
+public class RightRect extends RectMethod {
 
     public RightRect(EquationManager equationManager, boolean debug) {
         super(equationManager, debug);

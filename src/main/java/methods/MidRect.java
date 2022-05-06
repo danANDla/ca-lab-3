@@ -5,7 +5,7 @@ import equations.EquationManager;
 import exceptions.EssentialDiscontinuityException;
 import exceptions.UnattainableAccuracyException;
 
-public class MidRect extends RiemannMethod {
+public class MidRect extends RectMethod {
 
     public MidRect(EquationManager equationManager, boolean debug) {
         super(equationManager, debug);

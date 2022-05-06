@@ -1,11 +1,10 @@
 package methods;
 
-import equations.Equation;
 import equations.EquationManager;
 import exceptions.EssentialDiscontinuityException;
 import exceptions.UnattainableAccuracyException;
 
-public abstract class RiemannMethod {
+public abstract class RectMethod {
     private EquationManager equationManager;
     private boolean debug;
 
@@ -17,7 +16,7 @@ public abstract class RiemannMethod {
         return debug;
     }
 
-    public RiemannMethod(EquationManager equationManager, boolean debug) {
+    public RectMethod(EquationManager equationManager, boolean debug) {
         this.equationManager = equationManager;
         this.debug = debug;
     }
