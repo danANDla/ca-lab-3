@@ -23,6 +23,8 @@ public class Main {
                     if (eqid == -1) break;
                     double[] borders = asker.askBorders();
                     double eps = asker.askEps();
+
+                    io.printWarning("Метод левых прямоугольников");
                     try {
                         MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
                         io.printResult(leftRes, eps);
