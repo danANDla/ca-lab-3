@@ -7,13 +7,16 @@ import exceptions.UnattainableAccuracyException;
 
 public class LeftRect extends RiemannMethod {
 
-    public LeftRect(EquationManager equationManager) {
-        super(equationManager);
+    public LeftRect(EquationManager equationManager, boolean debug) {
+        super(equationManager, debug);
     }
 
     @Override
     public MethodResult solveEquation(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException {
-        Equation eq = equationManager.getEq(eqid);
+//        Equation eq = super.equationManager.getEq(eqid);
+        Equation eq = getEquationManager().getEq(eqid);
+        boolean debug = isDebug();
+
         int n1 = 20;
         int m = 2;
         double h = Math.abs(borders[0] - borders[1]) / n1;
@@ -21,8 +24,11 @@ public class LeftRect extends RiemannMethod {
         double int1 = integrate(eq, borders, h, n1);
         h = Math.abs(borders[0] - borders[1]) / (n1 * m);
         double int2 = integrate(eq, borders, h, n1 * m);
-        System.out.println("n=" + n1 + ", int = " + int1);
-        System.out.println("n=" + n1 * m + ", int = " + int2);
+
+        if (debug) {
+            System.out.println("n=" + n1 + ", int = " + int1);
+            System.out.println("n=" + n1 * m + ", int = " + int2);
+        }
 
         int iter = 0;
         while (!rungeRule(int1, int2, eps) && iter < 1000000) {
@@ -30,7 +36,7 @@ public class LeftRect extends RiemannMethod {
             n1 *= m;
             h = Math.abs(borders[0] - borders[1]) / (n1 * m);
             int2 = integrate(eq, borders, h, n1 * m);
-            System.out.println("n=" + n1 * m + ", int = " + int2);
+            if (debug) System.out.println("n=" + n1 * m + ", int = " + int2);
             iter++;
         }
         if (iter == 1000000) throw new UnattainableAccuracyException();

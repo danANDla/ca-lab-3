@@ -3,18 +3,15 @@ package application;
 import equations.EquationManager;
 import methods.LeftRect;
 import methods.MethodResult;
-import methods.SolutionStatus;
 import utils.Asker;
 import utils.IOutil;
 
-import java.util.Arrays;
-
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         IOutil io = new IOutil();
         EquationManager equationManager = new EquationManager();
         Asker asker = new Asker(io, equationManager);
-        LeftRect leftRect = new LeftRect(equationManager);
+        LeftRect leftRect = new LeftRect(equationManager, false);
 
 
         boolean running = true;
@@ -29,7 +26,7 @@ public class Main {
                     try {
                         MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
                         io.printResult(leftRes, eps);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         io.printError(e.getMessage());
                     }
                     break;
