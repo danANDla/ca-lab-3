@@ -22,7 +22,7 @@ public class LeftRect extends RiemannMethod {
         h = Math.abs(borders[0] - borders[1]) / (n1 * m);
         double int2 = integrate(eq, borders, h, n1 * m);
         System.out.println("n=" + n1 + ", int = " + int1);
-        System.out.println("n=" + n1*m + ", int = " + int2);
+        System.out.println("n=" + n1 * m + ", int = " + int2);
 
         int iter = 0;
         while (!rungeRule(int1, int2, eps) && iter < 1000000) {
@@ -30,7 +30,7 @@ public class LeftRect extends RiemannMethod {
             n1 *= m;
             h = Math.abs(borders[0] - borders[1]) / (n1 * m);
             int2 = integrate(eq, borders, h, n1 * m);
-            System.out.println("n=" + n1*m + ", int = " + int2);
+            System.out.println("n=" + n1 * m + ", int = " + int2);
             iter++;
         }
         if (iter == 1000000) throw new UnattainableAccuracyException();
@@ -45,7 +45,6 @@ public class LeftRect extends RiemannMethod {
         double point = borders[0];
         double ans = 0;
 
-        double maxDer = eq.get2DerivativeMaxValue(borders);
         double step = Math.abs(borders[0] - borders[1]) / steps;
 
         while (steps-- > 0) {
