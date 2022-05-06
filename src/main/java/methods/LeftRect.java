@@ -13,7 +13,6 @@ public class LeftRect extends RiemannMethod {
 
     @Override
     public MethodResult solveEquation(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException {
-//        Equation eq = super.equationManager.getEq(eqid);
         Equation eq = getEquationManager().getEq(eqid);
         boolean debug = isDebug();
 
@@ -40,6 +39,7 @@ public class LeftRect extends RiemannMethod {
             iter++;
         }
         if (iter == 1000000) throw new UnattainableAccuracyException();
+        showGap(eq, borders, h, n1*m);
         return new MethodResult(int2, SolutionStatus.OK);
     }
 
@@ -52,7 +52,6 @@ public class LeftRect extends RiemannMethod {
         double ans = 0;
 
         double step = Math.abs(borders[0] - borders[1]) / steps;
-
         while (steps-- > 0) {
             if (Math.abs(point) < 0.00000001) point = 0.0;
             if (isGap(eq, point)) {
@@ -74,5 +73,19 @@ public class LeftRect extends RiemannMethod {
         else if (eq.getImage(t) < 0) while (eq.getImage(t) < 0) t -= 0.000001;
 
         return getSquare(eq, new double[]{borders[0], t}) + getSquare(eq, new double[]{t + 0.0000011, borders[1]});
+    }
+
+    private void showGap(Equation eq, double[] borders, double h, int steps) throws EssentialDiscontinuityException{
+        double point = borders[0];
+        double step = Math.abs(borders[0] - borders[1]) / steps;
+        while (steps-- > 0) {
+            if (Math.abs(point) < 0.0001) point = 0.0;
+            if (isGap(eq, point)) {
+                System.out.println("неустранимый разрыв первого рода в точке " + point);
+                point += 0.0001;
+                continue;
+            }
+            point += step;
+        }
     }
 }
