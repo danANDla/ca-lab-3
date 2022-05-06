@@ -10,6 +10,7 @@ public class EquationManager {
         allEqations.add(new eq1());
         allEqations.add(new eq2());
         allEqations.add(new eq3());
+        allEqations.add(new eq4());
     }
 
     public ArrayList<Equation> getAllEqations() {
