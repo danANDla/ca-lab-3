@@ -22,5 +22,6 @@ public abstract class RiemannMethod {
         this.debug = debug;
     }
 
-    public abstract MethodResult solveEquation(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException;
+    public abstract int GetSteps(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException;
+    public abstract MethodResult solveEquation(int eqid, double[] borders, int steps) throws EssentialDiscontinuityException;
 }

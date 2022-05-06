@@ -26,8 +26,10 @@ public class Main {
 
                     io.printWarning("Метод левых прямоугольников");
                     try {
-                        MethodResult leftRes = leftRect.solveEquation(eqid, borders, eps);
+                        int steps = leftRect.GetSteps(eqid, borders, eps);
+                        MethodResult leftRes = leftRect.solveEquation(eqid, borders, steps);
                         io.printResult(leftRes, eps);
+                        io.printText("Количество разбиений: " + steps);
                     } catch (Exception e) {
                         io.printError(e.getMessage());
                     }

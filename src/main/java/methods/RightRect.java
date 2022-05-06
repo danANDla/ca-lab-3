@@ -12,7 +12,7 @@ public class RightRect extends RiemannMethod {
     }
 
     @Override
-    public MethodResult solveEquation(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException {
+    public int GetSteps(int eqid, double[] borders, double eps) throws EssentialDiscontinuityException, UnattainableAccuracyException {
         Equation eq = getEquationManager().getEq(eqid);
         boolean debug = isDebug();
 
@@ -39,8 +39,17 @@ public class RightRect extends RiemannMethod {
             iter++;
         }
         if (iter == 1000000) throw new UnattainableAccuracyException();
-        showGap(eq, borders, h, n1*m);
-        return new MethodResult(int2, SolutionStatus.OK);
+        return n1*m;
+    }
+
+    @Override
+    public MethodResult solveEquation(int eqid, double[] borders, int steps) throws EssentialDiscontinuityException {
+        Equation eq = getEquationManager().getEq(eqid);
+        boolean debug = isDebug();
+        double h = Math.abs(borders[0] - borders[1]) / steps;
+        double int1 = integrate(eq, borders, h, steps);
+        showGap(eq, borders, h, steps);
+        return new MethodResult(int1, SolutionStatus.OK);
     }
 
     private boolean rungeRule(double int1, double int2, double eps) {
