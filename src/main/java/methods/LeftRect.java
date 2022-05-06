@@ -18,9 +18,9 @@ public class LeftRect extends RiemannMethod {
         int m = 2;
         double h = Math.abs(borders[0] - borders[1]) / n1;
 
-        double int1 = integrate(eqid, borders, h, n1);
+        double int1 = integrate(eq, borders, h, n1);
         h = Math.abs(borders[0] - borders[1]) / (n1 * m);
-        double int2 = integrate(eqid, borders, h, n1 * m);
+        double int2 = integrate(eq, borders, h, n1 * m);
         System.out.println("n=" + n1 + ", int = " + int1);
         System.out.println("n=" + n1*m + ", int = " + int2);
 
@@ -29,7 +29,7 @@ public class LeftRect extends RiemannMethod {
             int1 = int2;
             n1 *= m;
             h = Math.abs(borders[0] - borders[1]) / (n1 * m);
-            int2 = integrate(eqid, borders, h, n1 * m);
+            int2 = integrate(eq, borders, h, n1 * m);
             System.out.println("n=" + n1*m + ", int = " + int2);
             iter++;
         }
@@ -41,8 +41,7 @@ public class LeftRect extends RiemannMethod {
         return Math.abs(int1 - int2) / 3 < eps;
     }
 
-    private double integrate(int eqid, double[] borders, double h, int steps) throws EssentialDiscontinuityException {
-        Equation eq = equationManager.getEq(eqid);
+    private double integrate(Equation eq, double[] borders, double h, int steps) throws EssentialDiscontinuityException {
         double point = borders[0];
         double ans = 0;
 
@@ -51,18 +50,17 @@ public class LeftRect extends RiemannMethod {
 
         while (steps-- > 0) {
             if (Math.abs(point) < 0.00000001) point = 0.0;
-            if (isGap(eqid, point)) {
+            if (isGap(eq, point)) {
                 point += 0.000001;
                 continue;
             }
-            ans += getSquare(eqid, new double[]{point, point + step});
+            ans += getSquare(eq, new double[]{point, point + step});
             point += step;
         }
         return ans;
     }
 
-    private double getSquare(int eqid, double[] borders) {
-        Equation eq = equationManager.getEq(eqid);
+    private double getSquare(Equation eq, double[] borders) {
         if (eq.getImage(borders[0]) * eq.getImage(borders[1]) >= 0) {
             return Math.abs(borders[1] - borders[0]) * eq.getImage(borders[0]);
         }
@@ -70,6 +68,6 @@ public class LeftRect extends RiemannMethod {
         if (eq.getImage(t) >= 0) while (eq.getImage(t) > 0) t -= 0.000001;
         else if (eq.getImage(t) < 0) while (eq.getImage(t) < 0) t -= 0.000001;
 
-        return getSquare(eqid, new double[]{borders[0], t}) + getSquare(eqid, new double[]{t + 0.0000011, borders[1]});
+        return getSquare(eq, new double[]{borders[0], t}) + getSquare(eq, new double[]{t + 0.0000011, borders[1]});
     }
 }

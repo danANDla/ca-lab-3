@@ -22,11 +22,10 @@ public abstract class RiemannMethod {
         else return (int) result + 1;
     }
 
-    public boolean isGap(int eqid, double v) throws EssentialDiscontinuityException {
-        Equation eq = equationManager.getEq(eqid);
+    public boolean isGap(Equation eq, double v) throws EssentialDiscontinuityException {
         Double y = eq.getImage(v);
         if(y.isNaN()){
-            if(gapRemovable(eqid, v)){
+            if(gapRemovable(eq, v)){
                 System.out.println("устранимый разрыв первого рода в " + v);
                 return true;
             }
@@ -37,8 +36,7 @@ public abstract class RiemannMethod {
         return false;
     }
 
-    public boolean gapRemovable(int eqid, double v) throws EssentialDiscontinuityException{
-        Equation eq = equationManager.getEq(eqid);
+    public boolean gapRemovable(Equation eq, double v) throws EssentialDiscontinuityException{
         double close = 1e-7;
         double l = eq.getImage(v + close);
         double r = eq.getImage(v + close);
